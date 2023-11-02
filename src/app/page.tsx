@@ -3,7 +3,8 @@ import Login from "./auth/components/login";
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
-      <Login/>
+      <h1>Bien Venido</h1>
+      <a href="/auth">Logar</a>
     </main>
   );
 }
