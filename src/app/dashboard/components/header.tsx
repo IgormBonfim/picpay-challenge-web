@@ -1,8 +1,10 @@
 "use client";
+import Menu, { MenuButton, MenuItem, MenuItems } from "@ui/menu";
 import { AuthContext } from "@/app/contexts/AuthContext";
 import { Bell, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
+import { ButtonOrLink } from "@ui/ButtonOrLink";
 
 export default function Header() {
   const pathname = usePathname().split("/");
@@ -19,21 +21,32 @@ export default function Header() {
                 <button className="text-zinc-500 hover:text-zinc-300 rounded-full bg-zinc-800 p-2">
                     <Bell className="w-5 h-5"/>
                 </button>
-                <button className="hover:text-zinc-900 rounded-full bg-green-600 p-2">
+
+                <Menu>
+                  <MenuButton className="hover:text-zinc-900 rounded-full bg-green-600 p-2">
                     <User className="w-5 h-5"/>
-                </button>
+                  </MenuButton>
+                  <MenuItems>
+                    <MenuItem activeClass="bg-gray-700">
+                      <ButtonOrLink>My account</ButtonOrLink>
+                    </MenuItem>
+                    <MenuItem activeClass="bg-gray-700">
+                      <ButtonOrLink>Sair</ButtonOrLink>
+                    </MenuItem>
+                  </MenuItems>
+                </Menu>
+                
             </div>  
         </div>
-        <div className="border-t-2 border-zinc-900">
-        </div>
+        <div className="border-t-2 border-zinc-900"></div>
       </header>
   );
 }
 
 function Name() {
-  // const { user } = useContext(AuthContext);
-  let user = undefined;
-    return (
+  const { user } = useContext(AuthContext);
+
+  return (
       <div className="md:block hidden">
         { user?.fullName ? (
           <span>{user?.fullName}</span>

@@ -5,6 +5,11 @@ import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
   const pathname = usePathname()
+
+  const links = [
+    { href: '/dashboard', label: 'Dashboard' },
+    { href: '/dashboard/transactions', label: 'Transaction' },
+  ]
   
   return (
     <aside className="max-w-64 p-4 bg-zinc-900 rounded-e-xl">

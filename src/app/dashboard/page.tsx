@@ -50,7 +50,6 @@ export default function Dashboard() {
             <p className="text-zinc-900 text-3xl font-bold">R$ 500,00</p>
           </div>
         </div>
-
       </section>
     </div>
   );
