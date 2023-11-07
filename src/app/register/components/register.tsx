@@ -1,4 +1,5 @@
 import Logo from "@/app/components/logo";
+import { GetServerSideProps } from "next";
 
 export default function Register() {
   return (
