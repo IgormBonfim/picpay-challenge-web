@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { ButtonOrLink } from "@ui/ButtonOrLink";
 
 export default function Header() {
+  const { signOut } = useContext(AuthContext);
   const pathname = usePathname().split("/");
   let lastWord = pathname[pathname.length - 1];  
 
@@ -31,7 +32,7 @@ export default function Header() {
                       <ButtonOrLink>My account</ButtonOrLink>
                     </MenuItem>
                     <MenuItem activeClass="bg-gray-700">
-                      <ButtonOrLink>Sair</ButtonOrLink>
+                      <ButtonOrLink onClick={signOut}>Logout</ButtonOrLink>
                     </MenuItem>
                   </MenuItems>
                 </Menu>
@@ -51,7 +52,10 @@ function Name() {
         { user?.fullName ? (
           <span>{user?.fullName}</span>
         ) : (
-          <span className="h-6 w-11/12 rounded-full bg-gray-700 text-gray-700 animate-pulse">Igor Meira Bonfim</span>
+          <div role="status" className="max-w-sm animate-pulse">
+            <div className="h-6 bg-gray-700 rounded-full w-48"></div>
+          </div>
+ 
         ) }
       </div>               
   );

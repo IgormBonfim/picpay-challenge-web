@@ -3,7 +3,7 @@ import { EnumValue } from "@/app/models/enumValue";
 import { api } from "@/app/services/api";
 import { getUser, signInRequest } from "@/app/services/authService";
 import { useRouter } from 'next/navigation'
-import { setCookie, parseCookies } from "nookies";
+import { setCookie, parseCookies, destroyCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
 
 
@@ -17,6 +17,7 @@ type AuthContextType = {
   user: User;
   isAuthenticated: boolean;
   signIn: (data: SignInData) => Promise<void>;
+  signOut: () => Promise<void>;
 };
 
 type SignInData = {
@@ -61,9 +62,14 @@ export function AuthProvider({ children }) {
 
     router.push("/dashboard");
   }
+  
+  async function signOut() {
+    destroyCookie(undefined, 'picpaychallenge.token');
+    router.push("/");
+  }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

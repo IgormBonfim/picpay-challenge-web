@@ -39,7 +39,7 @@ export function MenuItems({ children }: MenuProps) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
         >
-            <HeadlesssMenu.Items className="flex flex-col p-4 z-20 origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <HeadlesssMenu.Items className="flex flex-col p-2 z-20 origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
                 {children}
             </HeadlesssMenu.Items>
         </Transition>
