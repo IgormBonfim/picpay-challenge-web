@@ -1,3 +1,7 @@
+import { ComponentProps } from "react";
+
+type spinnerProps = ComponentProps<'svg'>;
+
 export default function ButtonSpinner() {
   return (
     <svg

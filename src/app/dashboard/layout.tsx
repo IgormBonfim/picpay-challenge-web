@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Sidebar from "@/app/dashboard/components/sidebar";
+import Sidebar from "@/app/dashboard/components/sidebar/sidebar";
 import Header from "@/app/dashboard/components/header";
 import { redirect } from "next/navigation";
 import { cookies } from 'next/headers'

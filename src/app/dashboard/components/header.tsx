@@ -4,7 +4,7 @@ import { AuthContext } from "@/app/contexts/AuthContext";
 import { Bell, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
-import { ButtonOrLink } from "@ui/ButtonOrLink";
+import { ButtonOrLink } from "@ui/buttonOrLink";
 
 export default function Header() {
   const { signOut } = useContext(AuthContext);
@@ -30,6 +30,9 @@ export default function Header() {
                   <MenuItems>
                     <MenuItem activeClass="bg-gray-700">
                       <ButtonOrLink>My account</ButtonOrLink>
+                    </MenuItem>
+                    <MenuItem activeClass="bg-gray-700">
+                      <ButtonOrLink>Perfil</ButtonOrLink>
                     </MenuItem>
                     <MenuItem activeClass="bg-gray-700">
                       <ButtonOrLink onClick={signOut}>Logout</ButtonOrLink>

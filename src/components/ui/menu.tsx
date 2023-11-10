@@ -1,5 +1,5 @@
 "use client"
-import { ButtonOrLink, Props as ButtonOrLinkProps } from '@/app/components/ui/ButtonOrLink';
+import { ButtonOrLink, Props as ButtonOrLinkProps } from '@ui/buttonOrLink';
 import { Menu as HeadlesssMenu, Transition  } from '@headlessui/react'
 import Link from 'next/link';
 import { ComponentProps, Fragment, ReactNode } from 'react';

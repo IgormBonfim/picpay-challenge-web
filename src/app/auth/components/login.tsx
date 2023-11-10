@@ -1,9 +1,9 @@
 "use client";
 
-import ButtonSpinner from "@/app/components/button-spiner";
-import Logo from "@/app/components/logo";
+import ButtonSpinner from "@/components/button-spiner";
+import Logo from "@/components/logo";
 import { AuthContext } from "@/app/contexts/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 
 type FormAuth = {
@@ -12,7 +12,8 @@ type FormAuth = {
 };
 
 export default function Login() {
-  let loading = false;
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     handleSubmit,
@@ -29,8 +30,14 @@ export default function Login() {
 
   const onSubmit: SubmitHandler<FormAuth> = (data: FormAuth) => {
     try {
-      loading = true;
-      signIn(data);
+      setLoading(true);
+      setErrorMessage(null);
+      signIn(data).catch((response) => {
+        let message: string = response.response.data.message;
+        console.log(message);
+        setErrorMessage(message)
+      }).finally(() => setLoading(false));
+
     } catch (error) {
       console.log("erro");
     }
@@ -73,17 +80,17 @@ export default function Login() {
         </div>
         <button
           type="submit"
-          className="w-full transition inline-flex items-center justify-center space-x-1.5 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-
-          
+          className="w-full transition inline-flex items-center justify-center space-x-1.5 bg-green-600 hover:bg-green-700  disabled:bg-green-300 disabled:bg-opacity-75 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          disabled={loading}
+          >          
           {loading && (
             <ButtonSpinner/>
-          )}
+            )}
           {!loading && (
             <span>Login</span>
-          )}
+            )}
         </button>
+        {errorMessage && (<span className="text-red-600 text-center">{errorMessage}</span>)}
         <div className="flex items-center flex-col">
           <a
             href="/register"
