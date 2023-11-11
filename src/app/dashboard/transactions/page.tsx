@@ -1,5 +1,18 @@
-export default function Transactions() {
+"use client";
+import Transaction from "@/app/dashboard/components/transaction";
+import { Pagination } from "@/app/models/responses/pagination";
+import { TransactionResponse } from "@/app/models/responses/transactionResponse";
+import { api } from "@/app/services/api";
+import { getTransactions } from "@/app/services/transactionsService";
+import { useEffect, useState } from "react";
 
+export default function Transactions() {
+  const [transactions, setTransactions] = useState<Pagination<TransactionResponse> | null>(null);
+  
+  useEffect(() => {
+    listTransactions().then((transactions) => setTransactions(transactions));
+  }, []);
+  
   return (
     <section className="flex flex-col gap-4">
     <div className="flex p-4">
@@ -7,15 +20,15 @@ export default function Transactions() {
       <span className="w-[10%]">Type</span>
       <span className="w-[10%]">Amount</span>
       <span className="w-[10%]">Payment Method</span>
-      <span className="w-[10%]">Date</span>
+      <span className="w-[10%] text-center">Date</span>
     </div>
-    <div className="flex flex-wrap bg-green-600 px-4 py-6 text-gray-200 rounded">
-      <span className="w-[60%]">Sicilia Marques Giacomazza</span>
-      <span className="w-[10%]">User</span>
-      <span className="w-[10%]">R$ 1500,00</span>
-      <span className="w-[10%]">Credit Card</span>
-      <span className="w-[10%]">06/11/2023</span>
-    </div>
+    {(transactions?.records.map((transaction, index) => <div key={index}> <Transaction transaction={transaction}/> </div> ))}
+
   </section>
   );
+}
+
+async function listTransactions(): Promise<Pagination<TransactionResponse>> {
+  let data = await getTransactions(api)
+  return data;
 }

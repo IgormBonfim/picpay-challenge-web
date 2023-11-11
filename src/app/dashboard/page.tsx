@@ -2,7 +2,7 @@ import { ArrowDown, ArrowUp, DollarSign } from "lucide-react";
 import Link from "next/link";
 import { FaMoneyCheck } from "react-icons/fa6";
 
-export default function Dashboard() {  
+export default function Dashboard() {    
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-start">
